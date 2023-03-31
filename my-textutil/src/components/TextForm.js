@@ -3,24 +3,30 @@ import React, { useState } from 'react'
 export default function TextForm(props) {
     const [text, setText] = useState("");
     const handleUpClick = () => {
-        setText(text.toUpperCase())
+        setText(text.toUpperCase());
+        props.showAlert("Converted to UpperCase","success")
     }
     const handleLoClick = () => {
         setText(text.toLowerCase())
+        props.showAlert("Converted to LowerCase","success")
     }
     const handleClClick = () => {
         setText("")
+        props.showAlert("Text Cleared","success")
     }
     const handleReverseLetters = () => {
         let rev = text.split("").reverse().join("");
         setText(rev)
+        props.showAlert("Text Reversed","success")
     }
     const handleReverseWords = () => {
         let rev = text.split(" ").reverse().join(" ");
         setText(rev)
+        props.showAlert("Words Reversed","success")
     }
     const handleCopyWords = () => {
         navigator.clipboard.writeText(text)
+        props.showAlert("Copied","success")
     }
     const handleRemoveExSpace = () => {
         setText(text.split(/[ ]+/).join(" "));
