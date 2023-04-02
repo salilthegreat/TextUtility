@@ -21,6 +21,7 @@ function App() {
   }
   const toggleMode = () => {
     if (mode === 'light') {
+      removeCls();
       setMode('dark');
       document.body.style.backgroundColor = 'grey';
       document.body.style.color = 'white';
@@ -33,6 +34,7 @@ function App() {
       //   document.title = "Textutil is Cool"
       // }, 1155);
     } else {
+      removeCls();
       setMode('light');
       document.body.style.backgroundColor = 'white';
       document.body.style.color = 'black';
@@ -40,13 +42,24 @@ function App() {
       // document.title = "Textutil-Light Mode"
     }
   }
+  const removeCls = ()=>{
+    document.body.classList.remove("bg-primary")
+    document.body.classList.remove("bg-dark")
+    document.body.classList.remove("bg-light")
+    document.body.classList.remove("bg-warning")
+    document.body.classList.remove("bg-danger")
+  }
+  const changeBG = (cls)=>{
+    removeCls();
+  document.body.classList.add(`bg-${cls}`)
+  }
   return (
     <>
       {/* <Navbar title="TextUtils" aboutText="About Us" mode={mode} toggleMode={toggleMode} />
       <Alert alert={alert} />
       <TextForm heading="Enter The Text To Analyze" mode={mode} showAlert={showAlert} /> */}
       <Router>
-        <Navbar title="TextUtils" aboutText="About Us" mode={mode} toggleMode={toggleMode} />
+        <Navbar title="TextUtils" aboutText="About Us" mode={mode} toggleMode={toggleMode} changeBG={changeBG} />
         <Alert alert={alert} />
         <Routes>
           <Route exact path='/' element={<TextForm heading="Enter The Text To Analyze" mode={mode} showAlert={showAlert} />} />
